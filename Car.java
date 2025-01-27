@@ -2,7 +2,7 @@ import java.awt.*;
 
 public abstract class Car {
     private int nrDoors; // Number of doors on the car
-    private double enginePower; // Engine power of the car
+    protected double enginePower; // Engine power of the car
     protected double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     private String modelName; // The car model name
@@ -15,6 +15,7 @@ public abstract class Car {
         modelName = _modelName;
         currentSpeed = _currentSpeed;
     }
+
     public int getNrDoors(){
         return nrDoors;
     }
@@ -36,7 +37,7 @@ public abstract class Car {
         currentSpeed = 0;
     }
 
-    public double speedFactor(){return 0;}
+    protected double speedFactor(){return 0;}
 
     protected abstract void incrementSpeed(double amount);
 
