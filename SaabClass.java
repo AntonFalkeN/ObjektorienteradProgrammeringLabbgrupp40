@@ -5,7 +5,7 @@ class Saab95 extends Car {
 
 
     public Saab95() {
-        super(2, Color.red, 125, "Saab95");
+        super(2,125, Color.red, "Saab95", 0);
         this.turboOn = false;
     }
 
@@ -17,7 +17,6 @@ class Saab95 extends Car {
         turboOn = false;
     }
 
-    @Override
     protected double speedFactor(){
         double turbo = 1;
         if(turboOn) turbo = 1.3;
