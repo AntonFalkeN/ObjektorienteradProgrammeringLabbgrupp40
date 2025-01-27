@@ -52,7 +52,4 @@ public abstract class Car {
         decrementSpeed(amount);
     }
 
-    public static void main(String[] args){
-        Volvo240 V = new Volvo240(4, 100, Color.black, "Volvo240");
-    }
 }
