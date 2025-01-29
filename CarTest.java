@@ -3,6 +3,8 @@ import java.awt.*;
 
 class CarTest {
     Volvo240 c = new Volvo240(4,Color.red);
+    Saab95 s = new Saab95();
+
     @org.junit.jupiter.api.Test
     void setColor() {
         c.setColor(Color.black);
@@ -41,21 +43,19 @@ class CarTest {
 
     @org.junit.jupiter.api.Test
     void turnLeft() {
-
+        c.startEngine();
+        c.gas(0.6);
+        c.turnLeft();
+        assertEquals("left", c.currentDirection);
+        assertEquals(c.x_value-c.currentSpeed, c.Move());
     }
 
     @org.junit.jupiter.api.Test
     void turnRight() {
+        c.startEngine();
+        c.gas(0.6);
+        c.turnRight();
+        assertEquals("right", c.currentDirection);
+        assertEquals(c.x_value+c.currentSpeed, c.Move());
     }
-
-    @org.junit.jupiter.api.Test
-    void move() {
-    }
-
- //for volvo
-    @org.junit.jupiter.api.Test
-    void speedFactor() {
-
-    }
-    //for saab
 }

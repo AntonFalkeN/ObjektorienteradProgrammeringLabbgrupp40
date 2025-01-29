@@ -12,7 +12,6 @@ public class Volvo240 extends Car{
         return getEnginePower() * 0.01 * trimFactor;
     }
 
-    //Kör dessa som abstrakta klasser istället för @Override
     protected void incrementSpeed(double amount){
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,getEnginePower());
     }
