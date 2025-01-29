@@ -45,11 +45,40 @@ public abstract class Car {
 
     // TODO fix this method according to lab pm
     public void gas(double amount){
+        if (amount < 0 || amount > 1) { //  Sanity-check: Only accept values between 0 and 1
+            return;
+        }
+
+        double originalSpeed = currentSpeed;
         incrementSpeed(amount);
+        if (originalSpeed > currentSpeed) { // Sanity-check: speed can't decrease
+            return;
+        }
+
+        if (currentSpeed > enginePower) { // Sanity-check: currentSpeed can't exceed enginePower
+            currentSpeed = enginePower;
+        }
+
     }
 
     // TODO fix this method according to lab pm
     public void brake(double amount){
+        if (amount < 0 || amount > 1) { //  Sanity-check: Only accept values between 0 and 1
+            return;
+        }
+
+        double originalSpeed = currentSpeed;
         decrementSpeed(amount);
+        if (originalSpeed < currentSpeed) { // Sanity-check: speed can't increase
+            return;
+        }
+
+        if (currentSpeed < 0) { // Sanity-check: currentSpeed can't be lower than 0
+            currentSpeed = 0;
+        }
+
     }
+
+
 }
+
