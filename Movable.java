@@ -1,5 +1,5 @@
 interface Movable { ;
-    public double Move(String direction);
+    public double Move();
     public void turnLeft();
     public void turnRight();
 }
