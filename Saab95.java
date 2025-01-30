@@ -22,4 +22,8 @@ class Saab95 extends Car {
         if(turboOn) turbo = 1.3;
         return enginePower * 0.01 * turbo;
     }
+
+    public double Move(String direction) {
+        return super.Move();
+    }
 }

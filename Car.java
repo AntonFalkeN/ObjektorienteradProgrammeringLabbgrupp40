@@ -82,17 +82,17 @@ public abstract class Car implements Movable {
     }
 
     public void turnLeft(){
-        x_value = Move("left");
         currentDirection = "left";
+        x_value = Move();
     }
 
     public void turnRight(){
-        x_value = Move("right");
         currentDirection = "right";
+        x_value = Move();
     }
-    public double Move(String direction){
+    public double Move(){
         double x = 0;
-        switch(direction){
+        switch(currentDirection){
             case "left":
                 x = x_value - currentSpeed;
                 break;
