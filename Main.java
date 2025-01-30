@@ -1,8 +1,8 @@
 import java.awt.*;
 
 public static void main(String[] args){
-    Volvo240 V = new Volvo240(4, Color.black);
-    Saab95 S = new Saab95();
+    Volvo240 V = new Volvo240(Color.black);
+    Saab95 S = new Saab95(Color.red);
 
     S.gas(0.5);
     System.out.println(S.currentSpeed);
