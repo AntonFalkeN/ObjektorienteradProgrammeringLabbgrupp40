@@ -40,27 +40,26 @@ public abstract class Car implements Movable {
         currentSpeed = 0;
     }
 
-    protected double speedFactor(){return 0;}
+    protected abstract double speedFactor();
 
-    protected abstract void incrementSpeed(double amount);
+    protected void incrementSpeed(double amount){
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,getEnginePower());
+    }
 
-    protected abstract void decrementSpeed(double amount);
+    protected void decrementSpeed(double amount){
+        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
+    }
 
     // TODO fix this method according to lab pm
     public void gas(double amount){
-        if (amount < 0 || amount > 1) { //  Sanity-check: Only accept values between 0 and 1
-            return;
+        try {  //  Sanity-check: Only accept values between 0 and 1
+            if (amount < 0 || amount > 1)
+                throw new IllegalArgumentException();
         }
-
-        double originalSpeed = currentSpeed;
+        catch(Exception e){
+            System.out.println("Fel, kontrollera att värdet är mellan 0 och 1: " + e);
+       }
         incrementSpeed(amount);
-        if (originalSpeed > currentSpeed) { // Sanity-check: speed can't decrease
-            return;
-        }
-
-        if (currentSpeed > enginePower) { // Sanity-check: currentSpeed can't exceed enginePower
-            currentSpeed = enginePower;
-        }
 
     }
 
