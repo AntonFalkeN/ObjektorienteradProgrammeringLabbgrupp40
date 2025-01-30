@@ -1,9 +1,14 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class Saab95Test {
     Saab95 s = new Saab95();
+    @BeforeEach
+    void setUp() {
+        s = new Saab95();
+    }
     @Test
     void setTurboOn() {
         s.startEngine();
