@@ -6,7 +6,7 @@ import java.awt.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Peterbilt388CarCarrierTest {
-    Peterbilt388CarCarrier p = new Peterbilt388CarCarrier(Color.cyan, 3);
+    Peterbilt388CarCarrier p = new Peterbilt388CarCarrier(Color.cyan, 3, 0);
 
     @BeforeEach
     void setUp() {
@@ -15,13 +15,13 @@ class Peterbilt388CarCarrierTest {
 
     @Test
     void rampUp() {
-        p.rampUp();
+        p.lower();
         assertEquals(70, p.getDegree());
     }
 
     @Test
     void rampDown() {
-        p.rampDown();
+        p.raise();
         assertEquals(0, p.getDegree());
     }
 
@@ -29,7 +29,7 @@ class Peterbilt388CarCarrierTest {
     void loadCar() {
         int sizeBefore = p.getStorage().size();
         Volvo240 v = new Volvo240(Color.cyan);
-        p.loadCar(v);
+        p.load(v);
         assertEquals(sizeBefore+1, p.getStorage().size());
         assertFalse(p.getStorage().size() > 9);
     }
@@ -38,7 +38,7 @@ class Peterbilt388CarCarrierTest {
     void unloadCar() {
         int sizeBefore = p.getStorage().size();
         Volvo240 v = new Volvo240(Color.cyan);
-        p.loadCar(v);
+        p.unlaod(v);
         assertEquals(sizeBefore+1, p.getStorage().size());
         assertTrue(p.getStorage().isEmpty());
     }
