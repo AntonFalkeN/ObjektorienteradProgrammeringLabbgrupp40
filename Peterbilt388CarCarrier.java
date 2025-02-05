@@ -13,14 +13,14 @@ public class Peterbilt388CarCarrier extends Car{
         //storage = new Car[capacity];
     }
 
-    private ArrayList<Car> getStorage(){return storage;}
-    private int getDegree(){return degree;}
+    public ArrayList<Car> getStorage(){return storage;}
+    public int getDegree(){return degree;}
 
-    private void rampUp(){
+    public void rampUp(){
         degree = 70;
     }
 
-    private void rampDown(){
+    public void rampDown(){
             if (currentSpeed != 0) {
                 throw new ArithmeticException("Bilen måste stå stilla för att fälla ner rampen!");
             }
@@ -39,7 +39,7 @@ public class Peterbilt388CarCarrier extends Car{
             throw new ArithmeticException("Bilen måste vara närmare och rampen måste vara nere!");
         }
     }
-    private Car unloadCar(){
+    public Car unloadCar(){
         if (degree != 0) {//kanske gör en funktion som kollar degree för att undvika duplicering
             throw new ArithmeticException("Rampen måste vara nere!");
         }
