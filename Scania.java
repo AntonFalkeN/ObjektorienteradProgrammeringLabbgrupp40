@@ -74,16 +74,17 @@ public class Scania extends Car{
 
     @Override
     public double Move() {
+        double x=0;
         try {
             if (angle == 0) {  // Endast om flaket är helt nere
-                super.Move();
+                x = super.Move();
             } else {
                 throw new IllegalStateException("Cannot move while the door is raised");
             }
         } catch (IllegalStateException e) {
             System.out.println("Error: " + e.getMessage());
         }
-        return x_value;
+        return x;
     }
 
 
