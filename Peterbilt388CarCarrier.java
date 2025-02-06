@@ -2,14 +2,14 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Peterbilt388CarCarrier extends Scania{
+public class Peterbilt388CarCarrier extends Scania implements Loadable {
     //private Car[] storage;
     ArrayList<Car> storage = new ArrayList<Car>(9);
-    //Byt till gamla array och ha None istället för att ta bort
-    //private int degree;
     private int currentLoad = 0;
-    Peterbilt388CarCarrier(Color _color, int capacity){
-        super(4, 200, _color, "Peterbilt388CarCarrier", 0, 0);
+    Peterbilt388CarCarrier(int capacity){
+        super();
+
+        //super(2, 200, Color.red, "Scania", 0);
         //storage = new Car[capacity];
     }
 
@@ -18,12 +18,16 @@ public class Peterbilt388CarCarrier extends Scania{
     public int getDegree(){return angle;}
 
     @Override
-    public void raise(){
+    public void raise(int amount){
+        amount = 70;
         super.raise(70);
     }
 
     @Override
-    public void lower(){super.lower(70);}
+    public void lower(int amount){
+        amount = 70;
+        super.lower(70);
+    }
 
     public void load(Car car){
         if (angle == 0 && car.y_value-y_value < 2 && car.x_value - x_value < 5 && !Objects.equals(car.getModelName(), "Peterbilt388CarCarrier") && currentSpeed == 0){
@@ -39,30 +43,16 @@ public class Peterbilt388CarCarrier extends Scania{
 
     @Override
     public double Move(){
-        double x = 0;
-        switch(currentDirection){
-            case "left":
-                for(int i = 0; i < getStorage().size(); i++) {
-                    storage[i].x_value = x_value - currentSpeed;
-                    storage[i].y_value = y_value + currentSpeed;
-                }
-                x = x_value - currentSpeed;
-                break;
-                case "right":
-                    for(int i = 0; i < getStorage().size(); i++) {
-                        storage[i].x_value = x_value + currentSpeed;
-                        storage[i].y_value = y_value + currentSpeed;
-                    }
-                    x = x_value + currentSpeed;
-                    break;
-            }
-            y_value = y_value + currentSpeed;
-            return x;
+        super.Move();
+        for(int i = 0; i < getStorage().size(); i++) {
+            storage.get(i).x_value = storage.get(i).Move();
         }
-
+        return 0;
     }
+
+
     public Car unload(){
-        if (angle != 0) {//kanske gör en funktion som kollar degree för att undvika duplicering
+        if (angle != 70) {//kanske gör en funktion som kollar degree för att undvika duplicering
             throw new ArithmeticException("Rampen måste vara nere!");
         }
         Car returnCar = storage.get(currentLoad-1);
@@ -70,7 +60,8 @@ public class Peterbilt388CarCarrier extends Scania{
         returnCar.x_value = x_value - 1;
         returnCar.y_value = y_value;
         return returnCar;
-    }
+        }
+
     @Override
     protected double speedFactor() {
         return 0;
