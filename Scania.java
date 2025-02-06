@@ -44,6 +44,19 @@ public class Scania extends Car{
     }
 
     @Override
+    public void startEngine(){
+        try {
+            if (angle == 0) {  // Endast om flaket är helt nere
+                super.startEngine();
+            } else {
+                throw new IllegalStateException("Cannot start the engine while the door is raised");
+            }
+        } catch (IllegalStateException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    @Override
     protected void incrementSpeed(double amount) {
         try {
             if (angle == 0) {
