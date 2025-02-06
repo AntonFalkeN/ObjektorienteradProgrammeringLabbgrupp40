@@ -19,16 +19,11 @@ public class Peterbilt388CarCarrier extends Scania{
 
     @Override
     public void raise(){
-        angle = 70;
+        super.raise(70);
     }
 
     @Override
-    public void lower(){
-            if (currentSpeed != 0) {
-                throw new ArithmeticException("Bilen måste stå stilla för att fälla ner rampen!");
-            }
-            else {angle = 0;}
-    }
+    public void lower(){super.lower(70);}
 
     public void load(Car car){
         if (angle == 0 && car.y_value-y_value < 2 && car.x_value - x_value < 5 && !Objects.equals(car.getModelName(), "Peterbilt388CarCarrier") && currentSpeed == 0){
