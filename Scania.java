@@ -37,7 +37,7 @@ public class Scania extends Car{
             if (amount < 0) {
                 throw new IllegalArgumentException("Amount must be positive");
             }
-            if (getCurrentSpeed() == 0) {
+            if (getCurrentSpeed() != 0) {
                 throw new IllegalStateException("Cannot raise the door while the truck is moving");
             }
             angle = Math.max(angle - amount, 0);
