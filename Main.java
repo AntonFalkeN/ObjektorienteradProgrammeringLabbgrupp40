@@ -11,6 +11,9 @@ class Main {
         System.out.println(P.currentSpeed);
         System.out.println(P.storage);
 
+        carRepairShop<Saab95> saabshoppen = new carRepairShop<Saab95>();
+        saabshoppen.data = S;
+        System.out.println(saabshoppen.getData());
    /* System.out.println(S.currentSpeed);
     V.gas(0.5);
     System.out.println(V.getCurrentSpeed());*/
