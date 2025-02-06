@@ -100,6 +100,7 @@ public abstract class Car implements Movable {
                 x = x_value + currentSpeed;
                 break;
         }
+        y_value = y_value + currentSpeed;
         return x;
     }
 }

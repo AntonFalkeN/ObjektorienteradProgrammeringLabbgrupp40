@@ -2,15 +2,14 @@ import java.awt.*;
 
 class Main {
     public static void main(String[] args) {
-        Volvo240 V = new Volvo240(Color.black);
-        Saab95 S = new Saab95(Color.red);
-
-        S.gas(0.5);
-        System.out.println(S.currentSpeed);
-        S.brake(0.5);
-        S.setTurboOn();
-        S.gas(0.5);
-        System.out.println(S.currentSpeed);
+        Peterbilt388CarCarrier P = new Peterbilt388CarCarrier(Color.green, 2);
+        Volvo240 v = new Volvo240(Color.cyan);
+        P.startEngine();
+        P.gas(0.4);
+        P.stopEngine();
+        P.loadCar(v);
+        System.out.println(P.currentSpeed);
+        System.out.println(P.storage);
 
    /* System.out.println(S.currentSpeed);
     V.gas(0.5);
