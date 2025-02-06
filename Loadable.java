@@ -1,5 +1,5 @@
 public interface Loadable {
-    void load(Car car);
-    Car unload();
+    <T> void load(T car);
+    <T> T unload();
     int getLoadSize(); // Returnerar antal bilar
 }
