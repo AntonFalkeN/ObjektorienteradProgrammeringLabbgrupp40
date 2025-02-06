@@ -1,8 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
-class carRepairShop<T>
+class CarRepairShop<T>
 {
     /*
     public T[] cars;
@@ -17,7 +16,7 @@ class carRepairShop<T>
     private List<T> cars;
     private  int capacity;
 
-    public carRepairShop(int capacity) {
+    public CarRepairShop(int capacity) {
         this.capacity = capacity;
         this.cars = new ArrayList<>();
 

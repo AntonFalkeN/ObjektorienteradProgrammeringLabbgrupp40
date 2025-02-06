@@ -6,40 +6,45 @@ import java.awt.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class Peterbilt388CarCarrierTest {
-    Peterbilt388CarCarrier p = new Peterbilt388CarCarrier(2);
-
+    private Peterbilt388CarCarrier p;
     @BeforeEach
     void setUp() {
-        //Peterbilt388CarCarrier p = new Peterbilt388CarCarrier(Color.cyan, 3);
+        p = new Peterbilt388CarCarrier(1);
     }
 
     @Test
     void raise() {
-        p.lower(70);
-        assertEquals(70, p.getDegree());
+        p.raise(70);
+        assertEquals(70, p.getAngle());
     }
 
     @Test
     void lower() {
-        p.raise(70);
-        assertEquals(0, p.getDegree());
+        p.stopEngine();
+        p.lower(70);
+        assertEquals(0, p.getAngle());
     }
 
     @Test
     void load() {
+        p.stopEngine();
         int sizeBefore = p.getStorage().size();
         Volvo240 v = new Volvo240(Color.cyan);
+        p.raise(70);
         p.load(v);
         assertEquals(sizeBefore+1, p.getStorage().size());
-        assertFalse(p.getStorage().size() > 9);
+        assertFalse(p.getStorage().size() > 1);
     }
 
     @Test
     void unload() {
-        int sizeBefore = p.getStorage().size();
+        p.stopEngine();
+        p.raise(70);
         Volvo240 v = new Volvo240(Color.cyan);
+        p.load(v);
+        int sizeBefore = p.getStorage().size();
         p.unload();
-        assertEquals(sizeBefore+1, p.getStorage().size());
+        assertEquals(sizeBefore-1, p.getStorage().size());
         assertTrue(p.getStorage().isEmpty());
     }
 }

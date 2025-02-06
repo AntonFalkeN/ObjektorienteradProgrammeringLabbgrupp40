@@ -5,10 +5,10 @@ import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class carRepairShopTest {
-    carRepairShop<Saab95> saabShop = new carRepairShop<>(1);
-    carRepairShop<Volvo240> volvoShop = new carRepairShop<>(1);
-    carRepairShop<Car> carShop = new carRepairShop<>(2);
+class CarRepairShopTest {
+    CarRepairShop<Saab95> saabShop = new CarRepairShop<>(1);
+    CarRepairShop<Volvo240> volvoShop = new CarRepairShop<>(1);
+    CarRepairShop<Car> carShop = new CarRepairShop<>(2);
     Volvo240 v = new Volvo240(Color.black);
     Saab95 s = new Saab95(Color.BLACK);
     Saab95 s1 = new Saab95(Color.BLACK);
