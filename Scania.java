@@ -51,6 +51,4 @@ public class Scania extends Truck{
         }
         return x;
     }
-
-
 }

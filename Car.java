@@ -9,7 +9,7 @@ public abstract class Car implements Movable {
     private String modelName; // The car model name
     protected double x_value;
     protected  double y_value;
-    protected String currentDirection;
+    protected String currentDirection = "";
 
     public Car(int _nrDoors, double _enginePower, Color _color, String _modelName,double _currentSpeed){
         nrDoors = _nrDoors;
@@ -50,7 +50,6 @@ public abstract class Car implements Movable {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
 
-    // TODO fix this method according to lab pm
     public void gas(double amount){
         try {  //  Sanity-check: Only accept values between 0 and 1
             if (amount < 0 || amount > 1)
@@ -60,10 +59,8 @@ public abstract class Car implements Movable {
             System.out.println("Fel, kontrollera att värdet är mellan 0 och 1: " + e);
        }
         incrementSpeed(amount);
-
     }
 
-    // TODO fix this method according to lab pm
     public void brake(double amount){
         if (amount < 0 || amount > 1) { //  Sanity-check: Only accept values between 0 and 1
             return;
@@ -78,9 +75,8 @@ public abstract class Car implements Movable {
         if (currentSpeed < 0) { // Sanity-check: currentSpeed can't be lower than 0
             currentSpeed = 0;
         }
-
     }
-
+    //Diskutera om de ska bli west 90 graders svängar istället
     public void turnLeft(){
         currentDirection = "left";
         x_value = Move();
@@ -90,17 +86,51 @@ public abstract class Car implements Movable {
         currentDirection = "right";
         x_value = Move();
     }
+
     public double Move(){
         double x = 0;
         switch(currentDirection){
-            case "left":
+            case "west":
+                x_value = x_value - currentSpeed;
+                /*
                 x = x_value - currentSpeed;
+                y_value = y_value + currentSpeed;
+                currentDirection = "straight";*/
                 break;
-            case "right":
+            case "east":
+                x_value = x_value + currentSpeed;
+                break;
+            case "north":
+                y_value = y_value + currentSpeed;
+                break;
+            case "south":
+                y_value = y_value - currentSpeed;
+                break;
+            default:
+                currentDirection = "east";
+                Move();
+            /*case "right":
                 x = x_value + currentSpeed;
+                y_value = y_value + currentSpeed;
+                currentDirection = "straight";
                 break;
+            case "back":
+                y_value = y_value - currentSpeed;
+                //System.out.println("vI ÅKER BAKÅT!");
+                break;
+            default:
+                y_value = y_value + currentSpeed;
+                //System.out.println("Framåt");
+                break;*/
         }
-        y_value = y_value + currentSpeed;
         return x;
+    }
+
+    public double getX(){
+        return x_value;
+    }
+
+    public double getY() {
+        return y_value;
     }
 }

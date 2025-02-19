@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Peterbilt388CarCarrier extends Truck implements Loadable {
-    //private Car[] storage;
+
     ArrayList<Car> storage = new ArrayList<Car>(9);
     private int currentLoad = 0;
     private int capacity;
