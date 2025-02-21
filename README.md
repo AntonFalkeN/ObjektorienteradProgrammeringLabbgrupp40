@@ -12,12 +12,16 @@ Vilka ansvarsområden har våra klasser?
 
 Move och moveable
 Moveable är ett interface som gör att alla subklasser som implementerar moveable tvingas också att implementera dess metoder. Därför finns logiken för dess metoder i den direkta abstrakta subklasser Car som i sin tur har subklasser som bara anropar sin supers metod för move. 
+
 Car 
 I den abstrakta klassen Car finns all generell logik som är för fordon i programmet. Så som hur många dörrar, vilken färg och vad det är för modell. Men även logiken för att gasa, bromsa, starta och stanna. Men klassen innehåller även getters och setters för att hantera hastighet och accelerationer. Alla subklasser till car har olika typer av acceleration och overrideas i klasserna separat. 
+
 Saab96
 Hanterar logiken för turbo on/off och dess egna acceleration har en egen konstruktor som delvis bygger på sin supers(Car) konstruktor . 
+
 Volvo240
 Hanterar egen logik för acceleration i förhållande till egen trim factor. Har en egen konstruktor som, likt saab, delvis bygger på sin supers(Car) konstruktor.
+
 Truck
 Den abstrakta klassen truck hanterar logik för att höja och sänka någon typ av ramp, 
 
