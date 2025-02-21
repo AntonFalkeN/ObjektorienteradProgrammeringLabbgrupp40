@@ -2,9 +2,14 @@
 MOTIVERING LABB 3
 
 Coupling: Vi har i så hög grad som möjligt försökt att undvika att klasser är beroende av varandra på ett sådant sätt att förändringar i en klass leder till att vi måste rekonstruera en annan klass. Därför har vi delat upp ansvaret i interfaces och i förälder klasser så att exempelvis Volvo och Saab ärver ifrån en förälder klass hellre än att de själva ska implementera logiken. 
+
 Cohesion: Vi har siktat på att skapa många små metoder för att kunna användas i programmet som byggstenar, dvs när vi vidareutvecklar programmet eller stöter på fel måste vi inte ändra hela klassen utan kan istället bygga om de mindre delarna. Detta gör klasserna flexibla för förändring och felhantering men också för utveckling och underhåll. Vi strävar i vårt program efter “high cohesion” vilket vi uppnår genom att låta modulerna inom våra klasser lösa deras uppgifter själva utan att behöva anropa andra klasser. Car Controller som styr bilarna har många kopplingar till de olika klasserna men detta ser vi som något bra i och med att Car Controller verkar lite som en Main klass.
-Dependency Inversion Principle: I denna labb (3) så introducerades car controller som funkar likt ett huvudprogram genom att ha interface för Moveable och Loadable går det att med säkerhet skriva kod som vi vet kommer att vara implementerad och vilka parametrar som tas in i metoder. Detta gör att Car Controller inte längre är lika beroende av övriga klasser som anropas och används. Det går alltså bra att ändra i klasserna utan att det blir fel i Car controller, detta gör det enklare att underhålla och testa. Att implementera interfaces gör det också enklare att testa klasser som ärver från exempelvis car eftersom att man vet säkert att metoderna kommer att finnas där och hur de används. 
+
+Dependency Inversion Principle: I denna labb (3) så introducerades car controller som funkar likt ett huvudprogram genom att ha interface för Moveable och Loadable går det att med säkerhet skriva kod som vi vet kommer att vara implementerad och vilka parametrar som tas in i metoder. Detta gör att Car Controller inte längre är lika beroende av övriga klasser som anropas och används. Det går alltså bra att ändra i klasserna utan att det blir fel i Car controller, detta gör det enklare att underhålla och testa. Att implementera 
+interfaces gör det också enklare att testa klasser som ärver från exempelvis car eftersom att man vet säkert att metoderna kommer att finnas där och hur de används. 
+
 Vilka ansvarsområden har våra klasser?
+
 Move och moveable
 Moveable är ett interface som gör att alla subklasser som implementerar moveable tvingas också att implementera dess metoder. Därför finns logiken för dess metoder i den direkta abstrakta subklasser Car som i sin tur har subklasser som bara anropar sin supers metod för move. 
 Car 
