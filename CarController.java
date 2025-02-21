@@ -89,7 +89,7 @@ public class CarController{
         if (x >= workshopX && x <= workshopX + workShopWidth && y >= workshopY && y <= workshopY+workShopHeight && !vCR.getCars().contains(car)){
             vCR.submitCar((Volvo240)car);
             car.stopEngine();
-            cars.remove(car);
+            //cars.remove(car); Kommer fungera efter rekonstruktionsplanen
         }
     }
 

@@ -76,14 +76,21 @@ public abstract class Car implements Movable {
             currentSpeed = 0;
         }
     }
-    //Diskutera om de ska bli west 90 graders svängar istället
-    public void turnLeft(){
-        currentDirection = "left";
+
+    public void turnNorth(){
+        currentDirection = "north";
         x_value = Move();
     }
-
-    public void turnRight(){
-        currentDirection = "right";
+    public void turnEast(){
+        currentDirection = "east";
+        x_value = Move();
+    }
+    public void turnWest(){
+        currentDirection = "west";
+        x_value = Move();
+    }
+    public void turnSouth(){
+        currentDirection = "south";
         x_value = Move();
     }
 

@@ -1,5 +1,7 @@
 interface Movable { ;
     public double Move();
-    public void turnLeft();
-    public void turnRight();
+    public void turnEast();
+    public void turnWest();
+    public void turnNorth();
+    public void turnSouth();
 }

@@ -39,10 +39,8 @@ class CarRepairShop<T>
         // följer logiken av first in first out
         try{
             T temp = cars.getFirst();
-            //if(Objects.equals(temp.getClass(),type)){
             cars.remove(temp);
             return temp;//}
-            //return null;
 
         } catch (Exception e) {
             throw new ArrayIndexOutOfBoundsException("The shop is empty... Sure this was the right one????️");

@@ -8,7 +8,6 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel{
 
-    // Just a single image, TODO: Generalize
     BufferedImage volvoImage;
     // To keep track of a single car's position
     Point volvoPoint = new Point();
@@ -23,8 +22,7 @@ public class DrawPanel extends JPanel{
     Point volvoWorkshopPoint = new Point(300,0);
 
 
-    // TODO: Make this general for all cars
-    <T> void moveit(int x, int y, Object car){
+    <T> void moveit(int x, int y, T car){
         if (car instanceof Volvo240) {
             volvoPoint.x = x;
             volvoPoint.y = y;
@@ -37,8 +35,6 @@ public class DrawPanel extends JPanel{
             scaniaPoint.x = x;
             scaniaPoint.y = y;
         }
-        //carPoint.x = x;
-        //carPoint.y = y;
     }
 
     // Initializes the panel and reads the images
@@ -57,11 +53,9 @@ public class DrawPanel extends JPanel{
         {
             ex.printStackTrace();
         }
-
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
-    // TODO: Change to suit your needs.
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

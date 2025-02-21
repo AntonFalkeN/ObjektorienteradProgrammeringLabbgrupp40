@@ -45,7 +45,7 @@ class CarTest {
     void turnLeft() {
         c.startEngine();
         c.gas(0.6);
-        c.turnLeft();
+        c.turnWest();
         assertEquals("left", c.currentDirection);
         assertEquals(c.x_value-c.currentSpeed, c.Move());
     }
@@ -54,7 +54,7 @@ class CarTest {
     void turnRight() {
         c.startEngine();
         c.gas(0.6);
-        c.turnRight();
+        c.turnEast();
         assertEquals("right", c.currentDirection);
         assertEquals(c.x_value+c.currentSpeed, c.Move());
     }
