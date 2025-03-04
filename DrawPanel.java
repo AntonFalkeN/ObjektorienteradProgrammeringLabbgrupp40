@@ -7,42 +7,16 @@ import javax.swing.*;
 // This panel represents the animated part of the view with the car images.
 
 public class DrawPanel extends JPanel{
-
     BufferedImage volvoImage;
-    // To keep track of a single car's position
-    Point volvoPoint = new Point();
-
     BufferedImage saabImage;
-    Point saabPoint = new Point();
-
     BufferedImage scaniaImage;
-    Point scaniaPoint = new Point();
-
     BufferedImage volvoWorkshopImage;
-    Point volvoWorkshopPoint = new Point(300,0);
-
-
-    <T> void moveit(int x, int y, T car){
-        if (car instanceof Volvo240) {
-            volvoPoint.x = x;
-            volvoPoint.y = y;
-        }
-        else if(car instanceof Saab95){
-            saabPoint.x = x;
-            saabPoint.y = y;
-        }
-        else if(car instanceof Scania){
-            scaniaPoint.x = x;
-            scaniaPoint.y = y;
-        }
-    }
-
+    Model model = CarController.returnModel();
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
-        this.setBackground(Color.pink);
-        // Print an error message in case file is not found with a try/catch block
+        this.setBackground(Color.pink);// Print an error message in case file is not found with a try/catch block
         try {
             volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
             volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
@@ -54,14 +28,13 @@ public class DrawPanel extends JPanel{
             ex.printStackTrace();
         }
     }
-
     // This method is called each time the panel updates/refreshes/repaints itself
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
-        g.drawImage(saabImage, saabPoint.x, saabPoint.y + 100, null);
-        g.drawImage(scaniaImage, scaniaPoint.x, scaniaPoint.y + 200, null);
-        g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
+        g.drawImage(volvoImage, model.volvoPoint.x, model.volvoPoint.y, null); // see javadoc for more info on the parameters
+        g.drawImage(saabImage, model.saabPoint.x, model.saabPoint.y + 100, null);
+        g.drawImage(scaniaImage, model.scaniaPoint.x, model.scaniaPoint.y + 200, null);
+        g.drawImage(volvoWorkshopImage, model.volvoWorkshopPoint.x, model.volvoWorkshopPoint.y, null);
     }
 }
