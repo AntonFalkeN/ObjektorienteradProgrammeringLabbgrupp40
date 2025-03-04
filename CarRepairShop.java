@@ -1,50 +1,21 @@
 import java.util.ArrayList;
 import java.util.List;
 
-class CarRepairShop<T>
-{
-    /*
-    public T[] cars;
-    public carRepairShop(int capacity){
-        cars = new T[capacity];
-    }
-    public  T getData(){
-        return data;
-    }
+class CarRepairShop<T>{
 
-     */
-    private List<T> cars;
-    private  int capacity;
+    private Storage<T> storage;
 
     public CarRepairShop(int capacity) {
-        this.capacity = capacity;
-        this.cars = new ArrayList<>();
-
+        this.storage = new Storage<>(capacity);
     }
 
-    public List<T> getCars(){return cars;}
 
     public boolean submitCar(T car) {
-        //if(Objects.equals(car.getClass(),type));
-        if (cars.size() < capacity) {
-            return cars.add(car);
-        } else {
-            System.out.println("This repair shop is full! Cannot add more cars.");
-            return false;
-        }
+        return storage.addItem(car);
     }
 
     public T returnCar() {
-        //eventuellt regplåt?
-        // följer logiken av first in first out
-        try{
-            T temp = cars.getFirst();
-            cars.remove(temp);
-            return temp;//}
-
-        } catch (Exception e) {
-            throw new ArrayIndexOutOfBoundsException("The shop is empty... Sure this was the right one????️");
-        }
+        return storage.removeFirst(); // FIFO
     }
 
 }

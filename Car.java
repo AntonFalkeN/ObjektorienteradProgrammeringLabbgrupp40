@@ -1,143 +1,71 @@
 import java.awt.*;
 
 
-public abstract class Car implements Movable {
+public abstract class Car{
     private int nrDoors; // Number of doors on the car
-    protected double enginePower; // Engine power of the car
-    protected double currentSpeed; // The current speed of the car
+    private double enginePower; // Engine power of the car
+    private double currentSpeed;
     private Color color; // Color of the car
     private String modelName; // The car model name
-    protected double x_value;
-    protected  double y_value;
-    protected String currentDirection = "";
+    private Movement movement;
 
-    public Car(int _nrDoors, double _enginePower, Color _color, String _modelName,double _currentSpeed){
+    public Car(int _nrDoors, double _enginePower, Color _color, String _modelName){
         nrDoors = _nrDoors;
         enginePower = _enginePower;
         color = _color;
         modelName = _modelName;
-        currentSpeed = _currentSpeed;
+        currentSpeed = 0;
+        movement = new Movement();
     }
 
-    public int getNrDoors(){
-        return nrDoors;
-    }
+    public int getNrDoors(){return nrDoors;}
     public double getEnginePower(){
         return enginePower;
     }
-    public double getCurrentSpeed(){
-        return currentSpeed;
-    }
+    public double getCurrentSpeed() { return currentSpeed; }
+    public void setCurrentSpeed(double speed) { this.currentSpeed = speed; } // Setter
     public String getModelName(){return modelName;}
     public Color getColor(){return color;}
-
     public void setColor(Color clr){color = clr;}
 
-    public void startEngine(){
-        currentSpeed = 0.1;
-    }
-    public void stopEngine(){
-        currentSpeed = 0;
-    }
+    public void startEngine(){setCurrentSpeed(0.1);}
+    public void stopEngine(){setCurrentSpeed(0);}
 
     protected abstract double speedFactor();
 
     protected void incrementSpeed(double amount){
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,getEnginePower());
+        setCurrentSpeed(Math.min(getCurrentSpeed() + speedFactor() * amount,getEnginePower()));
     }
 
     protected void decrementSpeed(double amount){
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
+        setCurrentSpeed(Math.max(getCurrentSpeed() - speedFactor() * amount,0));
     }
 
     public void gas(double amount){
-        try {  //  Sanity-check: Only accept values between 0 and 1
-            if (amount < 0 || amount > 1)
-                throw new IllegalArgumentException();
+        if (amount < 0 || amount > 1) //  Sanity-check: Only accept values between 0 and 1
+            throw new IllegalArgumentException();
+        else {
+            incrementSpeed(amount);
         }
-        catch(Exception e){
-            System.out.println("Fel, kontrollera att värdet är mellan 0 och 1: " + e);
-       }
-        incrementSpeed(amount);
     }
 
     public void brake(double amount){
         if (amount < 0 || amount > 1) { //  Sanity-check: Only accept values between 0 and 1
-            return;
-        }
-
-        double originalSpeed = currentSpeed;
-        decrementSpeed(amount);
-        if (originalSpeed < currentSpeed) { // Sanity-check: speed can't increase
-            return;
-        }
-
-        if (currentSpeed < 0) { // Sanity-check: currentSpeed can't be lower than 0
-            currentSpeed = 0;
+            throw new IllegalArgumentException();
+        } else {
+            decrementSpeed(amount);
         }
     }
 
-    public void turnNorth(){
-        currentDirection = "north";
-        x_value = Move();
-    }
-    public void turnEast(){
-        currentDirection = "east";
-        x_value = Move();
-    }
-    public void turnWest(){
-        currentDirection = "west";
-        x_value = Move();
-    }
-    public void turnSouth(){
-        currentDirection = "south";
-        x_value = Move();
-    }
+    public void turnNorth(){movement.turnNorth();}
+    public void turnEast(){movement.turnEast();}
+    public void turnWest(){movement.turnWest();}
+    public void turnSouth(){movement.turnSouth();}
+    public void move() {movement.move(currentSpeed);}
 
-    public double Move(){
-        double x = 0;
-        switch(currentDirection){
-            case "west":
-                x_value = x_value - currentSpeed;
-                /*
-                x = x_value - currentSpeed;
-                y_value = y_value + currentSpeed;
-                currentDirection = "straight";*/
-                break;
-            case "east":
-                x_value = x_value + currentSpeed;
-                break;
-            case "north":
-                y_value = y_value + currentSpeed;
-                break;
-            case "south":
-                y_value = y_value - currentSpeed;
-                break;
-            default:
-                currentDirection = "east";
-                Move();
-            /*case "right":
-                x = x_value + currentSpeed;
-                y_value = y_value + currentSpeed;
-                currentDirection = "straight";
-                break;
-            case "back":
-                y_value = y_value - currentSpeed;
-                //System.out.println("vI ÅKER BAKÅT!");
-                break;
-            default:
-                y_value = y_value + currentSpeed;
-                //System.out.println("Framåt");
-                break;*/
-        }
-        return x;
-    }
+    public double getX(){return movement.getX();}
+    public void setX(double amount){movement.setX(amount);}
+    public double getY() {return movement.getY(); }
+    public void setY(double amount){movement.setY(amount);}
 
-    public double getX(){
-        return x_value;
-    }
-
-    public double getY() {
-        return y_value;
-    }
 }

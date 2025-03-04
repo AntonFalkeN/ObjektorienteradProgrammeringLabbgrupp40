@@ -2,8 +2,8 @@ import java.awt.*;
 
 public class Scania extends Truck{
 
-    Scania(){
-        super(2, 200, Color.red, "Scania", 0);
+    public Scania(){
+        super(2, 200, Color.red, "Scania", 70);
     }
 
     protected double speedFactor() {
@@ -12,43 +12,30 @@ public class Scania extends Truck{
 
 
     @Override
-    public void startEngine(){
-        try {
-            if (angle == 0) {  // Endast om flaket är helt nere
-                super.startEngine();
-            } else {
-                throw new IllegalStateException("Cannot start the engine while the door is raised");
-            }
-        } catch (IllegalStateException e) {
-            System.out.println("Error: " + e.getMessage());
+    public void startEngine() {
+        if (ramp.isLowered()) {
+            super.startEngine();
+        } else {
+            throw new IllegalStateException("Cannot start the engine while the ramp is raised");
         }
     }
 
     @Override
     protected void incrementSpeed(double amount) {
-        try {
-            if (angle == 0) {
-                super.incrementSpeed(amount);
-            } else {
-                throw new IllegalStateException("Cannot accelerate while the door is raised");
-            }
-        } catch (IllegalStateException e) {
-            System.out.println("Error: " + e.getMessage());
+        if (ramp.isLowered()) {
+            super.incrementSpeed(amount);
+        } else {
+            throw new IllegalStateException("Cannot accelerate while the ramp is raised");
         }
     }
 
     @Override
-    public double Move() {
-        double x=0;
-        try {
-            if (angle == 0) {  // Endast om flaket är helt nere
-                x = super.Move();
-            } else {
-                throw new IllegalStateException("Cannot move while the door is raised");
-            }
-        } catch (IllegalStateException e) {
-            System.out.println("Error: " + e.getMessage());
+    public void move() {
+        if (ramp.isLowered()) {
+            super.move();
+        } else {
+            throw new IllegalStateException("Cannot move while the ramp is raised");
         }
-        return x;
     }
+
 }

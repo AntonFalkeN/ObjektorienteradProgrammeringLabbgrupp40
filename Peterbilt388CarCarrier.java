@@ -3,17 +3,17 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Peterbilt388CarCarrier extends Truck implements Loadable {
+    private Storage<Car> storage;
 
-    ArrayList<Car> storage = new ArrayList<Car>(9);
-    private int currentLoad = 0;
-    private int capacity;
-    Peterbilt388CarCarrier(int capacity){
-        super(2, 200, Color.red, "Scania", 0);
-        this.capacity = capacity;
+    public Peterbilt388CarCarrier(int capacity) {
+        super(2, 200, Color.red, "Peterbilt388CarCarrier", 70);
+        this.storage = new Storage<>(capacity);
     }
 
-    public ArrayList<Car> getStorage(){return storage;}
-    public int getLoadSize(){return storage.size();}
+    public int getLoadSize() {
+        return storage.getSize();
+    }
+
 
     @Override
     public void raise(int amount){
@@ -25,39 +25,36 @@ public class Peterbilt388CarCarrier extends Truck implements Loadable {
         super.lower(70);
     }
 
-    public void load(Car car){
 
-        if (angle == 70 && car.y_value-y_value < 5 && car.x_value - x_value < 5 && !Objects.equals(car.getModelName(), "Peterbilt388CarCarrier") && currentSpeed == 0){
-            storage.add(car);
-            currentLoad +=1;
-            car.y_value = y_value;
-            car.x_value = x_value;
+    @Override
+    public void move(){
+        super.move();
+        for(int i = 0; i < storage.getSize(); i++) {
+            storage.getStorage().get(i).setX(getX());
+        }
+    }
+
+    public void load(Car car){
+        if (ramp.isLowered() && car.getY()-getY() < 5 && car.getX() - getX() < 5 && !Objects.equals(car.getModelName(), "Peterbilt388CarCarrier") && getCurrentSpeed() == 0){
+            storage.addItem(car);
+            car.setY(getY());
+            car.setX(getX());
         }
         else{
             throw new ArithmeticException("Bilen måste vara närmare och rampen måste vara nere!");
         }
     }
 
-    @Override
-    public double Move(){
-        super.Move();
-        for(int i = 0; i < getStorage().size(); i++) {
-            storage.get(i).x_value = storage.get(i).Move();
-        }
-        return 0;
-    }
-
-
     public Car unload(){
-        if (angle != 70) {//kanske gör en funktion som kollar degree för att undvika duplicering
+        if (ramp.isLowered()) {
+            Car returnCar = storage.removeLast();
+            returnCar.setX(getX()-1);
+            returnCar.setY(getY());
+            return returnCar;
+        } else{
             throw new ArithmeticException("Rampen måste vara nere!");
         }
-        Car returnCar = storage.get(currentLoad-1);
-        storage.remove(currentLoad-1);
-        returnCar.x_value = x_value - 1;
-        returnCar.y_value = y_value;
-        return returnCar;
-        }
+    }
 
     @Override
     protected double speedFactor() {
