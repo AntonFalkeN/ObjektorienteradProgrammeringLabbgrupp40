@@ -14,7 +14,7 @@ public class Model {
 
     ArrayList<Car> cars = new ArrayList<>();
     CarRepairShop<Volvo240> vCR = new CarRepairShop<>(9);
-
+    Announcer announcer = new Announcer();
     CarView frame;
 
     public void performAction(Car car){
@@ -80,12 +80,18 @@ public class Model {
             car.gas(gas);
         }}
     private void turboManager(boolean turboNextState){
-        for (Car car : cars){
+        if (turboNextState){
+            announcer.notifyTurbo(true);
+        }
+        else {
+            announcer.notifyTurbo(false);
+        }
+        /*for (Car car : cars){
             if (car instanceof Saab95 && turboNextState){
                 ((Saab95) car).setTurboOn();}
             else if (car instanceof Saab95){
                 ((Saab95) car).setTurboOff();
-            }}}
+            }}*/}
     public void setTurboOn(){
         turboManager(true);
     }
