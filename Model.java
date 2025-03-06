@@ -24,7 +24,7 @@ public class Model {
         points.add(scaniaPoint);
 
         chekCollision(car.getX(), car.getY(), car) ;
-        car.Move();
+        car.move();
         int x = (int) Math.round(car.getX());
         int y = (int) Math.round(car.getY());
         moveit(x, y, car);
@@ -48,17 +48,18 @@ public class Model {
     }
 
     public void chekCollision(double x, double y, Car car){
+        String direct;
         if (x > 700){
-            car.currentDirection = "west";
+            car.setCurrentDirection("west");
         }
         else if (x < 0){
-            car.currentDirection = "east";
+            car.setCurrentDirection("east");
         }
         else if (y > 450){
-            car.currentDirection = "north";
+            car.setCurrentDirection("north");
         }
         else if (y < 0){
-            car.currentDirection = "south";
+            car.setCurrentDirection("south");
         }
         else if(car instanceof Volvo240){chekVolvoWorkshopCollision(x, y, car);}
     }
@@ -102,7 +103,7 @@ public class Model {
     private void rampManager(boolean rampNextState){
         for (Car car : cars){
             if (car instanceof Scania && rampNextState){
-                car.currentSpeed = 0;
+                car.setCurrentSpeed(0);
                 ((Scania) car).raise(70);
             }
             else if (car instanceof Scania){

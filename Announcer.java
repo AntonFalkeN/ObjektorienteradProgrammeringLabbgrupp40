@@ -19,7 +19,7 @@ public class Announcer {
     public void notifyStartStop(boolean state){
         for (Car car : stopStartAllSubscribers){
             if(state){
-                if(car.currentSpeed > 0.1){
+                if(car.getCurrentSpeed() > 0.1){
                     System.out.println("Bilen kör redan!");
                 }
                 else{

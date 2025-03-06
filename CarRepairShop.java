@@ -9,6 +9,7 @@ class CarRepairShop<T>{
         this.storage = new Storage<>(capacity);
     }
 
+    public List<T> getCars(){return storage.getStorage();}
 
     public boolean submitCar(T car) {
         return storage.addItem(car);

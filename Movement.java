@@ -1,7 +1,7 @@
 public class Movement {
     private double x;
     private double y;
-    private String currentDirection;
+    protected String currentDirection;
 
     public void turnNorth(){
         currentDirection = "north";

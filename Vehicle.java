@@ -14,6 +14,9 @@ public class Vehicle {
     }
 
     public double getCurrentSpeed() { return currentSpeed; }
+    public String getCurrentDirection() { return movement.currentDirection; }
+    public void setCurrentDirection(String direction) { movement.currentDirection = direction;}
+
     public void setCurrentSpeed(double speed) { this.currentSpeed = speed; } // Setter
     public String getModelName(){return modelName;}
     public Color getColor(){return color;}
