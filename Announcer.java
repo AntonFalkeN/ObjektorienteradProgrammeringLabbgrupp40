@@ -9,6 +9,8 @@ public class Announcer {
     }
     public void unsubscribeTurboOn(Car car) {
         turboOnSubscribers.remove(car);
+        System.out.println(car);
+        System.out.println("Added");
     }
     public void subscribeStopStart(Car car) {
         stopStartAllSubscribers.add(car);
@@ -19,7 +21,7 @@ public class Announcer {
     public void notifyStartStop(boolean state){
         for (Car car : stopStartAllSubscribers){
             if(state){
-                if(car.getCurrentSpeed() > 0.1){
+                if(car.currentSpeed > 0.1){
                     System.out.println("Bilen kör redan!");
                 }
                 else{

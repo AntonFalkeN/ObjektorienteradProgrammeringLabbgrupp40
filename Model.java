@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Model {
     Point volvoPoint = new Point();
@@ -11,17 +12,17 @@ public class Model {
     Point scaniaPoint = new Point();
     Point volvoWorkshopPoint = new Point(300,0);
 
-
     ArrayList<Car> cars = new ArrayList<>();
     ArrayList<Point> points = new ArrayList<>();
     CarRepairShop<Volvo240> vCR = new CarRepairShop<>(9);
     Announcer announcer = new Announcer();
     CarView frame;
+    VehicleFactory VF = new VehicleFactory();
 
     public void performAction(Car car){
-        points.add(volvoPoint);
-        points.add(saabPoint);
-        points.add(scaniaPoint);
+       // points.add(volvoPoint);
+       // points.add(saabPoint);
+       // points.add(scaniaPoint);
 
         chekCollision(car.getX(), car.getY(), car) ;
         car.move();
@@ -48,18 +49,17 @@ public class Model {
     }
 
     public void chekCollision(double x, double y, Car car){
-        String direct;
         if (x > 700){
-            car.setCurrentDirection("west");
+            car.currentDirection = "west";
         }
         else if (x < 0){
-            car.setCurrentDirection("east");
+            car.currentDirection = "east";
         }
         else if (y > 450){
-            car.setCurrentDirection("north");
+            car.currentDirection = "north";
         }
         else if (y < 0){
-            car.setCurrentDirection("south");
+            car.currentDirection = "south";
         }
         else if(car instanceof Volvo240){chekVolvoWorkshopCollision(x, y, car);}
     }
@@ -80,6 +80,7 @@ public class Model {
         for (Car car : cars) {
             car.brake(gas);
         }}
+
     public void gas(int amount){
         double gas = ((double) amount) / 100;
         for (Car car : cars) {
@@ -103,7 +104,7 @@ public class Model {
     private void rampManager(boolean rampNextState){
         for (Car car : cars){
             if (car instanceof Scania && rampNextState){
-                car.setCurrentSpeed(0);
+                car.currentSpeed = 0;
                 ((Scania) car).raise(70);
             }
             else if (car instanceof Scania){
@@ -122,10 +123,28 @@ public class Model {
         announcer.notifyStartStop(false);
     }
     public void addCar(String name){
-        //if(cars.size() < 5){
-           //Car p = VechileFactory.add(name);
-
-        //cars.add(p);}
+        if(cars.size() < 5)
+        {
+            if (Objects.equals(name, "")) {
+                Car p = (Car) VF.CreateRandom();
+                cars.add(p);
+                announcer.subscribeStopStart(p);
+                if(p instanceof Saab95){
+                    announcer.subscribeTurboOn(p);
+                }
+            } else {
+                Car p = (Car) VF.CreateVehicle(name);
+                cars.add(p);
+                announcer.subscribeStopStart(p);
+                if(p instanceof Saab95){
+                    announcer.subscribeTurboOn(p);
+                }
+            }
+        }
+        else
+        {
+            System.out.println("För många bilar!");
+        }
     }
     public void removeCar(){
         if(!cars.isEmpty()){
