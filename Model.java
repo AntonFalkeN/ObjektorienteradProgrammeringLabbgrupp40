@@ -13,11 +13,16 @@ public class Model {
 
 
     ArrayList<Car> cars = new ArrayList<>();
+    ArrayList<Point> points = new ArrayList<>();
     CarRepairShop<Volvo240> vCR = new CarRepairShop<>(9);
     Announcer announcer = new Announcer();
     CarView frame;
 
     public void performAction(Car car){
+        points.add(volvoPoint);
+        points.add(saabPoint);
+        points.add(scaniaPoint);
+
         chekCollision(car.getX(), car.getY(), car) ;
         car.Move();
         int x = (int) Math.round(car.getX());
@@ -77,21 +82,17 @@ public class Model {
     public void gas(int amount){
         double gas = ((double) amount) / 100;
         for (Car car : cars) {
-            car.gas(gas);
+            if (!vCR.getCars().contains(car)){
+                car.gas(gas);
         }}
-    private void turboManager(boolean turboNextState){
-        if (turboNextState){
+    }
+    private void turboManager(boolean turboNextState) {
+        if (turboNextState) {
             announcer.notifyTurbo(true);
-        }
-        else {
+        } else {
             announcer.notifyTurbo(false);
         }
-        /*for (Car car : cars){
-            if (car instanceof Saab95 && turboNextState){
-                ((Saab95) car).setTurboOn();}
-            else if (car instanceof Saab95){
-                ((Saab95) car).setTurboOff();
-            }}*/}
+    }
     public void setTurboOn(){
         turboManager(true);
     }
@@ -114,13 +115,23 @@ public class Model {
         rampManager(false);
     }
     protected void startAll(){
-        for (Car car: cars) {
-            car.startEngine();
-        }
+        announcer.notifyStartStop(true);
     }
     protected void stopAll(){
-        for (Car car: cars) {
-            car.stopEngine();
+        announcer.notifyStartStop(false);
+    }
+    public void addCar(String name){
+        //if(cars.size() < 5){
+           //Car p = VechileFactory.add(name);
+
+        //cars.add(p);}
+    }
+    public void removeCar(){
+        if(!cars.isEmpty()){
+            cars.remove(cars.getFirst());
+            points.remove(points.getFirst());
         }
+        System.out.println("Car removed");
+        frame.revalidate();
     }
 }

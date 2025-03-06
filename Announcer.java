@@ -18,7 +18,17 @@ public class Announcer {
     }
     public void notifyStartStop(boolean state){
         for (Car car : stopStartAllSubscribers){
-            System.out.println("pooooopopop");
+            if(state){
+                if(car.currentSpeed > 0.1){
+                    System.out.println("Bilen kör redan!");
+                }
+                else{
+                    car.startEngine();
+                }
+            }
+            else{
+                car.stopEngine();
+            }
         }
     }
     public void notifyTurbo(boolean state){

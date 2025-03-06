@@ -13,8 +13,12 @@ public class Application {
 
         //Gör i main
         Volvo240 v = new Volvo240(Color.black);
+        cc.model.announcer.subscribeStopStart(v);
         Saab95 s = new Saab95(Color.blue);
+        cc.model.announcer.subscribeStopStart(s);
+        cc.model.announcer.subscribeTurboOn(s);
         Scania sc = new Scania();
+        cc.model.announcer.subscribeStopStart(sc);
 
         cc.model.cars.add(v);
         cc.model.cars.add(s);
@@ -22,6 +26,5 @@ public class Application {
 
         // Start the timer
         cc.timer.start();
-
     }
 }

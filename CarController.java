@@ -70,4 +70,6 @@ public class CarController{
     protected void stopAll(){
         model.stopAll();
     }
+    public void addCar(String name){model.addCar(name);}
+    void removeCar(){model.removeCar();}
 }

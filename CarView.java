@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
@@ -14,7 +16,7 @@ import java.awt.event.ActionListener;
  **/
 
 public class CarView extends JFrame{
-    private static final int X = 800;
+    private static final int X = 900;
     private static final int Y = 800;
 
     // The controller member
@@ -24,8 +26,11 @@ public class CarView extends JFrame{
 
     JPanel gasPanel = new JPanel();
     JSpinner gasSpinner = new JSpinner();
+    JTextField stringName = new JTextField();
     int gasAmount = 0;
+    String inputName = "";
     JLabel gasLabel = new JLabel("Amount of gas");
+    JLabel nameLabel = new JLabel("Model of car");
 
     JButton gasButton = new JButton("Gas");
     JButton brakeButton = new JButton("Brake");
@@ -36,6 +41,9 @@ public class CarView extends JFrame{
 
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
+    JButton addCarButton = new JButton("Add car");
+    JButton removeCarButton = new JButton("Remove car");
+
     Model model = carC.returnModel();
     // Constructor
     public CarView(String framename, CarController cc){
@@ -67,14 +75,23 @@ public class CarView extends JFrame{
                 gasAmount = (int) ((JSpinner)e.getSource()).getValue();
             }
         });
+        stringName = new JTextField(10);
+        stringName.addCaretListener(new CaretListener(){
+            @Override
+            public void caretUpdate(CaretEvent e) {
+                    inputName = (String) ((JTextField)e.getSource()).getText();
+                }
+            });
 
-        gasPanel.setLayout(new BorderLayout());
-        gasPanel.add(gasLabel, BorderLayout.PAGE_START);
-        gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
+        gasPanel.setLayout(new GridLayout(4, 1));
+        gasPanel.add(gasLabel, 0);// BorderLayout.PAGE_START);
+        gasPanel.add(gasSpinner, 1);//BorderLayout.PAGE_END);
+        gasPanel.add(nameLabel, 2);
+        gasPanel.add(stringName, 3);//BorderLayout.CENTER);
 
         this.add(gasPanel);
 
-        controlPanel.setLayout(new GridLayout(2,4));
+        controlPanel.setLayout(new GridLayout(3,7));
 
         controlPanel.add(gasButton, 0);
         controlPanel.add(turboOnButton, 1);
@@ -82,6 +99,8 @@ public class CarView extends JFrame{
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
         controlPanel.add(lowerBedButton, 5);
+        controlPanel.add(addCarButton, 6);
+        controlPanel.add(removeCarButton, 7);
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.pink);
@@ -136,6 +155,18 @@ public class CarView extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {carC.raiseBed();}
         });
+        addCarButton.addActionListener((new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.addCar(inputName);
+            }
+        }));
+        removeCarButton.addActionListener((new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.removeCar();
+            }
+        }));
                 // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
 
