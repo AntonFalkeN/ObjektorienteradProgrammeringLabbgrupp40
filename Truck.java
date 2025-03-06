@@ -7,6 +7,7 @@ public abstract class Truck extends Car{
     public Truck(int nrDoors, double enginePower, Color color, String modelName, int maxAngle){
         super(nrDoors,enginePower,color,modelName);
         this.ramp = new Ramp(maxAngle);
+        this.ramp.raise(maxAngle);
     }
 
     public void raise(int amount) {

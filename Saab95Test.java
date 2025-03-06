@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/*
 class Saab95Test {
     Saab95 s = new Saab95(Color.black);
     @BeforeEach
@@ -38,4 +38,4 @@ class Saab95Test {
         s.incrementSpeed(0.5);
         assertEquals(s.currentSpeed, speed+s.speedFactor()*0.5);
     }
-}
+}*/

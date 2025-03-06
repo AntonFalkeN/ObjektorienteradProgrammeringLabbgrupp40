@@ -5,7 +5,7 @@ class Saab95 extends Car {
 
 
     public Saab95(Color _color) {
-        super(2,125, _color, "Saab95", 0);
+        super(2,125, _color, "Saab95");
         this.turboOn = false;
     }
 
