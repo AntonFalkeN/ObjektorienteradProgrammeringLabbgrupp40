@@ -12,9 +12,13 @@ public class Application {
         cc.model.frame = new CarView("CarSim 1.0", cc);
 
         //Gör i main
-        //Volvo240 v = new Volvo240(Color.black);
-        //Saab95 s = new Saab95(Color.blue);
-        //Scania sc = new Scania();
+        Volvo240 v = new Volvo240(Color.black);
+        cc.model.announcer.subscribeStopStart(v);
+        Saab95 s = new Saab95(Color.blue);
+        cc.model.announcer.subscribeStopStart(s);
+        cc.model.announcer.subscribeTurboOn(s);
+        Scania sc = new Scania();
+        cc.model.announcer.subscribeStopStart(sc);
 
         cc.model.cars.add((Car)VF.CreateVehicle("Volvo240"));
         cc.model.cars.add((Car)VF.CreateVehicle("Saab95"));
