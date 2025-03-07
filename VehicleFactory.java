@@ -12,8 +12,8 @@ public class VehicleFactory {
 
     ;
 
-     Object CreateVehicle(String model) {
-        Object v;
+     Car CreateVehicle(String model) {
+        Car v;
 
         switch (model) {
             case "Saab95":
@@ -29,7 +29,7 @@ public class VehicleFactory {
                 v = new Peterbilt388CarCarrier(9);
                 return v;
             default:
-                throw new ClassCastException();
+                throw new IllegalArgumentException();
         }
     }
     public Object CreateRandom(){

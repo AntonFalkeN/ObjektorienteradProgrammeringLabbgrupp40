@@ -23,17 +23,23 @@ public class Model {
        // points.add(volvoPoint);
        // points.add(saabPoint);
        // points.add(scaniaPoint);
-
+        if(cars.size() > 0){
         chekCollision(car.getX(), car.getY(), car) ;
         car.move();
         int x = (int) Math.round(car.getX());
         int y = (int) Math.round(car.getY());
         moveit(x, y, car);
         // repaint() calls the paintComponent method of the panel
-        frame.drawPanel.repaint();
+        frame.drawPanel.repaint();}
     }
 
     <T> void moveit(int x, int y, T car){
+        if(cars.size() > 0){
+            int index = cars.indexOf(car);
+            points.get(index).x = x;
+            points.get(index).y = y;
+        }
+        /*
         if (car instanceof Volvo240) {
             volvoPoint.x = x;
             volvoPoint.y = y;
@@ -45,7 +51,7 @@ public class Model {
         else if(car instanceof Scania){
             scaniaPoint.x = x;
             scaniaPoint.y = y;
-        }
+        }*/
     }
 
     public void chekCollision(double x, double y, Car car){
@@ -135,6 +141,8 @@ public class Model {
                 if(p instanceof Saab95){
                     announcer.subscribeTurboOn(p);
                 }
+                Point e = new Point();
+                points.add(e);
             } else {
                 Car p = (Car) VF.CreateVehicle(name);
                 cars.add(p);
@@ -142,6 +150,8 @@ public class Model {
                 if(p instanceof Saab95){
                     announcer.subscribeTurboOn(p);
                 }
+                Point e = new Point();
+                points.add(e);
             }
         }
         else
@@ -152,8 +162,9 @@ public class Model {
     public void removeCar(){
         if(!cars.isEmpty()){
             cars.remove(cars.getFirst());
+            points.remove(points.getFirst());
         }
         System.out.println("Car removed");
-        frame.revalidate();
+        //frame.revalidate();
     }
 }

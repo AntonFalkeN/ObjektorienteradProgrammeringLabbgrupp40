@@ -43,21 +43,27 @@ public class DrawPanel extends JPanel{
         for (Car car : model.cars){
             Image image;
             Point point;
+            int index = model.cars.indexOf(car);
+
             if (car instanceof Volvo240) {
                 image = volvoImage;
-                point = model.volvoPoint;
+                //point = model.volvoPoint;
+                point = model.points.get(index);
             }
             else if(car instanceof Saab95){
                 image = saabImage;
-                point = model.saabPoint;
+                //point = model.saabPoint;
+                point = model.points.get(index);
             }
             else if(car instanceof Scania){
                 image = scaniaImage;
-                point = model.scaniaPoint;
+                //point = model.scaniaPoint;
+                point = model.points.get(index);
             }
             else {
                 image = volvoImage;
-                point = model.volvoPoint;
+                //point = model.volvoPoint;
+                point = model.points.get(index);
             }
             g.drawImage(image, point.x, point.y + ofsett, null);
             ofsett += 100;

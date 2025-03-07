@@ -23,7 +23,7 @@ public abstract class Truck extends Car{
         if (getCurrentSpeed() == 0) {
             ramp.lower(amount);
         } else {
-            throw new IllegalStateException("Cannot raise the door while the truck is moving");
+            //throw new IllegalStateException("Cannot raise the door while the truck is moving");
         }
     }
 
